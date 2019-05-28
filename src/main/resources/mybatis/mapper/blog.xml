@@ -27,13 +27,7 @@
 	]]>
 	</select>
 	
-	<select id="selectCategoryList" resultType="categoryvo" parameterType="string">
-	<![CDATA[
-		select id, title, logo
-		from category
-		where id= #{id}
-	]]>
-	</select>
+	
 	<!-- <select id="getTotalBoardCount" resultType="long">
 	<![CDATA[
 		select count(*)

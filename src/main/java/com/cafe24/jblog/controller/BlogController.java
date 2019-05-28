@@ -1,5 +1,7 @@
 package com.cafe24.jblog.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import com.cafe24.jblog.security.Auth;
 import com.cafe24.jblog.service.BlogService;
 import com.cafe24.jblog.service.FileUploadService;
 import com.cafe24.jblog.vo.BlogVo;
+import com.cafe24.jblog.vo.CategoryVo;
+import com.cafe24.jblog.vo.PostVo;
 import com.cafe24.jblog.vo.UserVo;
 
 @Controller
@@ -33,7 +37,11 @@ public class BlogController {
 	@RequestMapping("/{id}")
 	public String main(
 			@PathVariable String id,
-			Model model) {
+			Model model,
+			HttpSession session) {
+		if(id == null) {
+			id= ((UserVo)session.getAttribute("authUser")).getId();
+		}
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
 		return "blog/blog-main";
@@ -70,11 +78,16 @@ public class BlogController {
 	}
 	
 	@RequestMapping("/category")
-	public String category(HttpSession session) {
+	public String category(
+			HttpSession session,
+			Model model) {
 		
 		String id= ((UserVo)session.getAttribute("authUser")).getId();
-		blogService.getCategories(id);
 		
+		BlogVo blogVo = blogService.getBlog(id);
+		List<CategoryVo> categoryList= blogService.getCategories(id);
+		model.addAttribute("blogVo", blogVo);
+		model.addAttribute("categoryList", categoryList);
 		return "/blog/blog-admin-category";
 	}
 	
@@ -84,4 +97,20 @@ public class BlogController {
 		return "/blog/blog-admin-write";
 		
 	}
+	
+	@RequestMapping(value = "/write", method = RequestMethod.POST)
+	public String write(
+			@ModelAttribute PostVo postVo,
+			Model model
+			) {
+		
+		blogService.writePost(postVo);
+		
+		
+		return "/blog/blog-admin-basic";
+		
+	}
+	
+	
+	
 }

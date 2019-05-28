@@ -25,9 +25,5 @@ public class BlogDao {
 		return session.selectOne("blog.select", id);
 	}
 
-	public List<CategoryVo> selectCategoryList(String id) {
-		
-		return session.selectList("blog.selectCategoryList", id);
-	}
 
 }
