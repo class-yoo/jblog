@@ -1,6 +1,7 @@
 package com.cafe24.jblog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ public class BlogService {
 	}
 
 	public BlogVo getBlog(String id) {
-		
 		return blogDao.selectBlog(id);
 	}
 
@@ -39,8 +39,24 @@ public class BlogService {
 		
 	}
 
-	public void writePost(PostVo postVo) {
-			
+	public boolean writePost(PostVo postVo) {
+		return 1== postDao.insertPost(postVo);
 	}
+
+	public PostVo getPost(Long postNo) {
+		
+		return postDao.selectPost(postNo);
+	}
+	
+	public List<PostVo> getPosts(Long categoryNo) {
+		
+		return postDao.selectPosts(categoryNo);
+	}
+
+	public Boolean removeCategory(Long categoryNo) {
+		
+		return 1== categoryDao.deleteCategory(categoryNo);
+	}
+
 
 }

@@ -2,12 +2,21 @@ package com.cafe24.jblog.vo;
 
 public class PostVo {
 
+	private Long no;
 	private String title;
 	private String contents;
 	private String regDate;
 	private Long categoryNo;
 	private String categoryName;
-	
+
+	public Long getNo() {
+		return no;
+	}
+
+	public void setNo(Long no) {
+		this.no = no;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -46,6 +55,12 @@ public class PostVo {
 
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	@Override
+	public String toString() {
+		return "PostVo [no=" + no + ", title=" + title + ", contents=" + contents + ", regDate=" + regDate
+				+ ", categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
 	}
 
 }

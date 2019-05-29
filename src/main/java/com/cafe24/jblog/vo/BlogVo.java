@@ -4,8 +4,9 @@ public class BlogVo {
 	private String blogId;
 	private String title;
 	private String logo;
-
-	public BlogVo() {}
+	
+	public BlogVo() {
+	}
 	
 	public BlogVo(String blogId, String title, String logo) {
 		this.blogId = blogId;
@@ -16,7 +17,7 @@ public class BlogVo {
 	public String getBlogId() {
 		return blogId;
 	}
-	
+
 	public void setBlogId(String blogId) {
 		this.blogId = blogId;
 	}
@@ -35,6 +36,11 @@ public class BlogVo {
 
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+
+	@Override
+	public String toString() {
+		return "BlogVo [blogId=" + blogId + ", title=" + title + ", logo=" + logo + "]";
 	}
 
 }

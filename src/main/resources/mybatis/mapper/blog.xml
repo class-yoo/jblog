@@ -6,8 +6,8 @@
 	<insert id="insert" parameterType="blogvo">
 		<![CDATA[
 		insert 
-		into board
-		values (null , #{title}, #{contents}, 0, now(), #{groupNo},  #{orderNo}+1 , #{depth}+1, #{parentNo}, #{userNo})
+		into blog
+		values (#{blogId}, #{title}, #{logo})
 		]]>
 	</insert>
 	
@@ -21,7 +21,7 @@
 	
 	<select id="select" resultType="blogvo" parameterType="string">
 	<![CDATA[
-		select id, title, logo
+		select id as 'blogId', title, logo
 		from blog
 		where id= #{id}
 	]]>

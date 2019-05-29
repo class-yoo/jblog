@@ -39,9 +39,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		session.setAttribute("authUser", authUser);
 		response.sendRedirect(request.getContextPath());
 		
-		
 		return false; // true일 뒤에 컨트롤러 연결된 것이 없으면 에러남
 		
 	}
-
 }

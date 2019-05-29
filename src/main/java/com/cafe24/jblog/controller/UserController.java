@@ -12,7 +12,6 @@ import com.cafe24.jblog.vo.UserVo;
 @Controller
 @RequestMapping("user")
 public class UserController {
-
 	
 	@Autowired
 	private UserService userService;

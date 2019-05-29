@@ -17,6 +17,16 @@ public class CategoryDao {
 	
 	public List<CategoryVo> selectCategoryList(String id) {
 
-		return session.selectList("blog.selectCategoryList", id);
+		return session.selectList("category.selectCategoryList", id);
+	}
+
+	public int insertCategory(CategoryVo categoryVo) {
+		
+		return session.insert("category.insert", categoryVo);
+	}
+
+	public int deleteCategory(Long categoryNo) {
+		
+		return session.delete("category.delete", categoryNo);
 	}
 }

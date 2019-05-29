@@ -2,9 +2,20 @@ package com.cafe24.jblog.vo;
 
 public class CategoryVo {
 	private Long no;
+	private String name;
+	private int count;
 	private String description;
 	private String regDate;
 	private String blogId;
+
+	public CategoryVo() {
+	}
+
+	public CategoryVo(String name, String description, String blogId) {
+		this.name = name;
+		this.description = description;
+		this.blogId = blogId;
+	}
 
 	public Long getNo() {
 		return no;
@@ -14,10 +25,26 @@ public class CategoryVo {
 		this.no = no;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
