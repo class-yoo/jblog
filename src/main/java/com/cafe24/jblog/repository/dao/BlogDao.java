@@ -21,9 +21,9 @@ public class BlogDao {
 		return session.selectOne("blog.select", id);
 	}
 
-	public int insertBlog() {
+	public int insertBlog(BlogVo blogVo) {
 		
-		return session.insert("blog.insert");
+		return session.insert("blog.insert", blogVo);
 	}
 
 

@@ -9,6 +9,10 @@
 		into post
 		values (null , #{title}, #{contents}, now(), #{categoryNo})
 		]]>
+		
+		<selectKey keyProperty="no" resultType="long" order="AFTER">
+                SELECT IFNULL(MAX(no),1) FROM post 
+        </selectKey>
 	</insert>
 	
 	<update id="update" parameterType="postvo">

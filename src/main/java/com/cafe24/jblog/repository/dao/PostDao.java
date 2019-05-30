@@ -14,11 +14,11 @@ public class PostDao {
 	@Autowired
 	private SqlSession session;
 
-	public int insertPost(PostVo postVo) {
-		System.out.println(postVo);
-		return session.insert("post.insert", postVo);
+	public Long insertPost(PostVo postVo) {
+		Long postNo = (long)session.insert("post.insert", postVo);
+		return postNo;
 	}
-
+	
 	public PostVo selectPost(Long postNo) {
 		
 		return session.selectOne("post.select", postNo);

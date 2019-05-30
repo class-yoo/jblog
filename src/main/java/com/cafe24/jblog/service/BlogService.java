@@ -45,8 +45,8 @@ public List<CategoryVo> getCategories(String id) {
 		
 	}
 	
-	public boolean writePost(PostVo postVo) {
-		return 1== postDao.insertPost(postVo);
+	public Long writePost(PostVo postVo) {
+		return postDao.insertPost(postVo);
 	}
 
 	public PostVo getPost(Long postNo) {

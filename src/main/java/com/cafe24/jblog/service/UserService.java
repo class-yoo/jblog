@@ -26,7 +26,7 @@ public class UserService {
 		BlogVo blogVo = new BlogVo(userVo.getId(), "블로그 제목을 입력해주세요.", "" );
 		CategoryVo categoryVo = new CategoryVo("미분류", "카테고리를 지정하지 않은경우", userVo.getId());
 			
-		return 1== userDao.insertUser(userVo) && 1== blogDao.insertBlog() && 1== categoryDao.insertCategory(categoryVo);
+		return 1== userDao.insertUser(userVo) && 1== blogDao.insertBlog(blogVo) && 1== categoryDao.insertCategory(categoryVo);
 	}
 
 	public Boolean existId(String id) {

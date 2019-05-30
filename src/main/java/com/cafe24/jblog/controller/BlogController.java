@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +22,8 @@ import com.cafe24.jblog.vo.CategoryVo;
 import com.cafe24.jblog.vo.PostVo;
 import com.cafe24.jblog.vo.UserVo;
 
-@Controller
+@Controller   
 @RequestMapping("/blog")
-//@RequestMapping("/{id:(?assets).*)}")
 public class BlogController {
 
 	@Autowired
@@ -33,11 +31,16 @@ public class BlogController {
 
 	@Autowired
 	private FileUploadService fileUploadService;
-
+	
 	@RequestMapping("/{id}/{categoryNo}/{postNo}")
-	public String main(@PathVariable String id, @PathVariable Long categoryNo, @PathVariable Long postNo, Model model,
+	public String main(
+			@PathVariable String id,
+			@PathVariable Long categoryNo,
+			@PathVariable Long postNo,
+			Model model,
 			HttpSession session) {
-		if (id == null) {
+		
+		if (id == null || "".equals(id)) {
 			id = ((UserVo) session.getAttribute("authUser")).getId();
 		}
 		BlogVo blogVo = blogService.getBlog(id);
@@ -62,14 +65,14 @@ public class BlogController {
 	}
 	
 	@Auth
-	@RequestMapping("/management") // userId를 authUser를 보내서 사용하는게 낫나 Session에서 뽑아서 사용하는게 낫나 ?
+	@RequestMapping("/admin/basic") // userId를 authUser를 보내서 사용하는게 낫나 Session에서 뽑아서 사용하는게 낫나 ?
 	public String management(HttpSession session, Model model) {
-
+		
 //		service에서 사용자아이디를 이용해서 기본블로그 정보 불러오기
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blogVo", blogVo);
-
+		
 		return "blog/blog-admin-basic";
 	}
 
@@ -85,10 +88,11 @@ public class BlogController {
 		
 //		service에서 블로그 기본설정 수정하는 내용 넣기 및 멀티파트리졸버사용
 
-		return "redirect:/blog/management";
+		return "redirect:/blog/"+id+"/-1/-1";
 	}
-
-	@RequestMapping("/category")
+	
+	
+	@RequestMapping("/admin/category")
 	public String category(HttpSession session, Model model) {
 
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
@@ -100,31 +104,25 @@ public class BlogController {
 		return "/blog/blog-admin-category";
 	}
 	
-	@RequestMapping("/category/delete/{no}")
-	public String category(@PathVariable Long categoryNo,
-			Model model) {
-		
-		return "/blog/blog-admin-category";
-	}
-
-	@RequestMapping("/post/write")
+	@RequestMapping("/admin/write")
 	public String write(Model model, HttpSession session) {
 
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
 		List<CategoryVo> categoryList = blogService.getCategoriesForMain(id);
-
+		
 		model.addAttribute("categoryList", categoryList);
 		return "/blog/blog-admin-write";
-
+		
 	}
-
-	@RequestMapping(value = "/post/write", method = RequestMethod.POST)
-	public String write(@ModelAttribute PostVo postVo, Model model) {
-
-		blogService.writePost(postVo);
-
-		return "/blog/blog-admin-basic";
-
+	
+	@RequestMapping(value = "/admin/write", method = RequestMethod.POST)
+	public String write(
+			@ModelAttribute PostVo postVo,
+				HttpSession session) {
+		String id = ((UserVo) session.getAttribute("authUser")).getId();
+		Long postNo = blogService.writePost(postVo);
+		return "redirect:/blog/"+id+"/"+postVo.getCategoryNo()+"/"+postNo;
+		
 	}
 
 }
