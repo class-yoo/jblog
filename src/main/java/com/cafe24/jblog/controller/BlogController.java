@@ -41,13 +41,12 @@ public class BlogController {
 			id = ((UserVo) session.getAttribute("authUser")).getId();
 		}
 		BlogVo blogVo = blogService.getBlog(id);
-		System.out.println("blogVo.getBlogId()= " + blogVo.getBlogId());
-
-		List<CategoryVo> categoryList = blogService.getCategories(id);
+		
+		List<CategoryVo> categoryList = blogService.getCategoriesForMain(id);
 		if (categoryNo == -1 && categoryList.size() != 0) {
 			categoryNo = categoryList.get(0).getNo();
 		}
-
+			
 		List<PostVo> postList = blogService.getPosts(categoryNo);
 		if (postNo == -1 && postList.size() != 0) {
 			postNo = postList.get(0).getNo();
@@ -61,7 +60,7 @@ public class BlogController {
 		return "blog/blog-main";
 
 	}
-
+	
 	@Auth
 	@RequestMapping("/management") // userId를 authUser를 보내서 사용하는게 낫나 Session에서 뽑아서 사용하는게 낫나 ?
 	public String management(HttpSession session, Model model) {
@@ -83,7 +82,7 @@ public class BlogController {
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
 		BlogVo blogVo = new BlogVo(id, title, saveFileName);
 		blogService.modify(blogVo);
-
+		
 //		service에서 블로그 기본설정 수정하는 내용 넣기 및 멀티파트리졸버사용
 
 		return "redirect:/blog/management";
@@ -112,7 +111,7 @@ public class BlogController {
 	public String write(Model model, HttpSession session) {
 
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
-		List<CategoryVo> categoryList = blogService.getCategories(id);
+		List<CategoryVo> categoryList = blogService.getCategoriesForMain(id);
 
 		model.addAttribute("categoryList", categoryList);
 		return "/blog/blog-admin-write";

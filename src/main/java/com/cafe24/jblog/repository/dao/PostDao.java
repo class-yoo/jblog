@@ -29,4 +29,9 @@ public class PostDao {
 		return session.selectList("post.selectPostList", categoryNo);
 	}
 
+	public int deletePost(Long categoryNo) {
+		
+		return session.delete("post.delete", categoryNo);
+	}
+
 }

@@ -33,12 +33,18 @@ public class BlogService {
 		return blogDao.selectBlog(id);
 	}
 
-	public List<CategoryVo> getCategories(String id) {
+	public List<CategoryVo> getCategoriesForMain(String id) {
+		
+		return categoryDao.selectCategoryListForMain(id);
+		
+	}
+
+public List<CategoryVo> getCategories(String id) {
 		
 		return categoryDao.selectCategoryList(id);
 		
 	}
-
+	
 	public boolean writePost(PostVo postVo) {
 		return 1== postDao.insertPost(postVo);
 	}
@@ -55,7 +61,13 @@ public class BlogService {
 
 	public Boolean removeCategory(Long categoryNo) {
 		
+		postDao.deletePost(categoryNo);
 		return 1== categoryDao.deleteCategory(categoryNo);
+	}
+
+	public Long createCategory(CategoryVo categoryVo) {
+		Long categoryNo = categoryDao.insertCategory(categoryVo);
+		return categoryNo;
 	}
 
 

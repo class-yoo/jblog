@@ -15,14 +15,19 @@ public class CategoryDao {
 	@Autowired
 	private SqlSession session;
 	
+	public List<CategoryVo> selectCategoryListForMain(String id) {
+
+		return session.selectList("category.selectCategoryListForMain", id);
+	}
+	
 	public List<CategoryVo> selectCategoryList(String id) {
 
 		return session.selectList("category.selectCategoryList", id);
 	}
 
-	public int insertCategory(CategoryVo categoryVo) {
-		
-		return session.insert("category.insert", categoryVo);
+	public Long insertCategory(CategoryVo categoryVo) {
+		Long categoryNo= (long) session.insert("category.insert", categoryVo);
+		return categoryNo;
 	}
 
 	public int deleteCategory(Long categoryNo) {

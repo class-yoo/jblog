@@ -3,7 +3,7 @@ package com.cafe24.jblog.vo;
 public class CategoryVo {
 	private Long no;
 	private String name;
-	private int count;
+	private int postCount;
 	private String description;
 	private String regDate;
 	private String blogId;
@@ -33,12 +33,12 @@ public class CategoryVo {
 		this.name = name;
 	}
 
-	public int getCount() {
-		return count;
+	public int getPostCount() {
+		return postCount;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setPostCount(int postCount) {
+		this.postCount = postCount;
 	}
 
 	public String getDescription() {

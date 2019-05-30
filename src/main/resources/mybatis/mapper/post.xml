@@ -35,5 +35,13 @@
 		order by no desc
 	]]>
 	</select>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[
+			delete 
+			from post
+			where category_no = #{categoryNo}
+		]]>
+	</delete>
 
 </mapper>
