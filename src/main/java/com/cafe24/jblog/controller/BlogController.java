@@ -45,17 +45,23 @@ public class BlogController {
 		}
 		BlogVo blogVo = blogService.getBlog(id);
 		
+		if(blogVo == null) {
+			return "redirect:/main";
+		}
+		
 		List<CategoryVo> categoryList = blogService.getCategoriesForMain(id);
 		if (categoryNo == -1 && categoryList.size() != 0) {
 			categoryNo = categoryList.get(0).getNo();
 		}
-			
+		
 		List<PostVo> postList = blogService.getPosts(categoryNo);
 		if (postNo == -1 && postList.size() != 0) {
 			postNo = postList.get(0).getNo();
 		}
 		PostVo postVo = blogService.getPost(postNo);
-
+		if(postVo == null) {
+			postVo = new PostVo("빈카테고리입니다.","빈카테고리입니다.");
+		}
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("postList", postList);
@@ -94,9 +100,9 @@ public class BlogController {
 	
 	@RequestMapping("/admin/category")
 	public String category(HttpSession session, Model model) {
-
+		
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
-
+		
 		BlogVo blogVo = blogService.getBlog(id);
 		List<CategoryVo> categoryList = blogService.getCategories(id);
 		model.addAttribute("blogVo", blogVo);
@@ -109,8 +115,10 @@ public class BlogController {
 
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
 		List<CategoryVo> categoryList = blogService.getCategoriesForMain(id);
+		BlogVo blogVo = blogService.getBlog(id);
 		
 		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("blogVo", blogVo);
 		return "/blog/blog-admin-write";
 		
 	}
@@ -121,7 +129,7 @@ public class BlogController {
 				HttpSession session) {
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
 		Long postNo = blogService.writePost(postVo);
-		return "redirect:/blog/"+id+"/"+postVo.getCategoryNo()+"/"+postNo;
+		return "redirect:/admin/write";
 		
 	}
 

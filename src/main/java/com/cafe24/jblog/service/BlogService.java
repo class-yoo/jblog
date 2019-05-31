@@ -13,6 +13,8 @@ import com.cafe24.jblog.vo.BlogVo;
 import com.cafe24.jblog.vo.CategoryVo;
 import com.cafe24.jblog.vo.PostVo;
 
+import javafx.geometry.Pos;
+
 @Service
 public class BlogService {
 

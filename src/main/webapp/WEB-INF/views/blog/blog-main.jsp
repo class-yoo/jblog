@@ -46,11 +46,8 @@
 			</ul>
 		</div>
 		
-		<div id="footer">
-			<p>
-				<strong>${blogVo.title}</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views/includes/blog-footer.jsp"/>
+		
 	</div>
 </body>
 </html>

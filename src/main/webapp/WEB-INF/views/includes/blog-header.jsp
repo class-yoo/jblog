@@ -13,7 +13,9 @@
 		</c:when>
 		<c:otherwise>
 			<li><a href="${pageContext.servletContext.contextPath}/user/logout">로그아웃</a></li>
-			<li><a href="${pageContext.servletContext.contextPath}/blog/admin/basic">블로그 관리</a></li>
+			<li><a href="${pageContext.servletContext.contextPath}/blog/admin/basic">나의 블로그 관리</a></li>
+			<li><a href="${pageContext.servletContext.contextPath}/blog/${authUser.getId()}/-1/-1">나의 블로그 홈</a></li>
+			<li><a href="${pageContext.servletContext.contextPath}/main">메인화면</a></li>
 		</c:otherwise>
 	</c:choose>
 </div>

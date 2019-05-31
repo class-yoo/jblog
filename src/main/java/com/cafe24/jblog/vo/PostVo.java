@@ -9,6 +9,13 @@ public class PostVo {
 	private Long categoryNo;
 	private String categoryName;
 
+	public PostVo() {}	
+	
+	public PostVo(String title, String contents) {
+		this.title =title;
+		this.contents = contents;
+	}
+	
 	public Long getNo() {
 		return no;
 	}

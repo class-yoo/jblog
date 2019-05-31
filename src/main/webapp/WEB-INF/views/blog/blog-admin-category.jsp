@@ -21,6 +21,7 @@ function removeCategory(categoryId) {
         success : function (data) {
             if (data.data) {
             	$('#tr-'+categoryId).remove();
+            	
             }else{
             	alert('다음에 다시 시도해주세요');
             }
@@ -54,7 +55,6 @@ function createCategory() {
             $('#category-column').after(categoryTr);
             $('#categoryName').val('');
             $('#description').val('');
-            
         }
     });
 }
@@ -107,11 +107,7 @@ function createCategory() {
 		      	</table> 
 			</div>
 		</div>
-		<div id="footer">
-			<p>
-				<strong>Spring 이야기</strong> is powered by JBlog (c)2016
-			</p>
-		</div>
+		<c:import url="/WEB-INF/views//includes/blog-footer.jsp"/>
 	</div>
 </body>
 </html>
