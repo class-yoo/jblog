@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.jblog.security.Auth;
-import com.cafe24.jblog.security.AuthUser;
 import com.cafe24.jblog.service.BlogService;
 import com.cafe24.jblog.service.FileUploadService;
 import com.cafe24.jblog.vo.BlogVo;
@@ -68,7 +67,6 @@ public class BlogController {
 		model.addAttribute("postList", postList);
 		model.addAttribute("postVo", postVo);
 		return "blog/blog-main";
-
 	}
 	
 	@Auth
@@ -94,7 +92,7 @@ public class BlogController {
 		blogService.modify(blogVo);
 		
 //		service에서 블로그 기본설정 수정하는 내용 넣기 및 멀티파트리졸버사용
-
+		
 		return "redirect:/blog/"+id+"/-1/-1";
 	}
 	
