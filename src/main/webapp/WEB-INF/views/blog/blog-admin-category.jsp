@@ -41,13 +41,15 @@ function createCategory() {
             	var categoryName = $('#categoryName').val();
             	var description = $('#description').val();
             	var postCount = 0;
-            	var categoryTr = '<tr id="tr-'+categoryNo+'">'+
-				'<td>'+
-					'<p class="td-category-count">'+topCategoryIndex+'</p>'+
+            	
+            	var categoryTr = 
+            	'<tr id="tr-'+categoryNo+'">'+
+					'<td>'+
+						'<p class="td-category-count">'+topCategoryIndex+'</p>'+
 					'</td>'+
-						'<td>'+categoryName+'</td>'+
-						'<td>'+postCount+'</td>'+
-						'<td>'+description+'</td>'+
+					'<td>'+categoryName+'</td>'+
+					'<td>'+postCount+'</td>'+
+					'<td>'+description+'</td>'+
 					'<td>'+
 						'<img onclick="removeCategory('+categoryNo+')" src="${pageContext.request.contextPath}/assets/images/delete.jpg">'+
 					'</td>'+
