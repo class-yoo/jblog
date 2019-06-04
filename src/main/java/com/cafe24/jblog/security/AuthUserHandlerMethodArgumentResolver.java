@@ -17,7 +17,7 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-
+		System.out.println("AuthUserHandlerMethodArgumentResolver");
 		if (supportsParameter(parameter) == false) {
 			return WebArgumentResolver.UNRESOLVED; // 내가 지원해주는 것이 아니기 때문에 다른 resolver에게 요청하라는뜻
 		}

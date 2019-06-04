@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cafe24.jblog.security.Auth;
+import com.cafe24.jblog.security.AuthUser;
 import com.cafe24.jblog.service.BlogService;
 import com.cafe24.jblog.service.FileUploadService;
 import com.cafe24.jblog.vo.BlogVo;
@@ -129,7 +130,7 @@ public class BlogController {
 				HttpSession session) {
 		String id = ((UserVo) session.getAttribute("authUser")).getId();
 		Long postNo = blogService.writePost(postVo);
-		return "redirect:/admin/write";
+		return "redirect:/blog/admin/write";
 		
 	}
 

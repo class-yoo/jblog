@@ -47,8 +47,6 @@
 	<!-- 2. 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
 	
-	<!-- the mvc resources url mapping d:/mysite-uploads/-->
-	<!-- url이 images/profile/파일명 으로 들어오면 프로젝트가 시작된 d://jblog/logo/ 밑에서 파일을 찾아서 응답한다. -->
 	<mvc:resources mapping="images/logo/**" location="file:/jblog/logo/" />
 	
 	<!-- 3 .ViewResolver 설정 -->
